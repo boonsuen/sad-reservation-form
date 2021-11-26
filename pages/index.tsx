@@ -1,5 +1,14 @@
 import Head from 'next/head';
-import { Button, Space, Typography, Input, Divider, Select } from 'antd';
+import {
+  Button,
+  Space,
+  Typography,
+  Input,
+  Divider,
+  Select,
+  Checkbox,
+  DatePicker,
+} from 'antd';
 import styled from 'styled-components';
 import {
   CalendarOutlined,
@@ -7,6 +16,7 @@ import {
   UserOutlined,
   SecurityScanOutlined,
 } from '@ant-design/icons';
+import moment from 'moment';
 
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -21,6 +31,7 @@ const Main = styled.main`
 
   .logo {
     width: 270px;
+    margin: 20px auto 20px auto;
   }
   .verificationContainer {
     display: flex;
@@ -34,7 +45,7 @@ const Main = styled.main`
 
 const Content = styled.div`
   background-color: #fff;
-  padding: 30px;  
+  padding: 40px;
   border-radius: 10px;
   box-shadow: 13px 37px 84px 0px rgba(50, 55, 72, 0.1);
 `;
@@ -90,6 +101,57 @@ const SelectBookInputs = styled.div`
 
   .ant-input-prefix {
     margin-right: 10px;
+  }
+`;
+
+const ListView = styled.div`
+  border: 1px solid #b8bcca;
+  border-radius: 10px;
+  margin-top: 42px;
+  .list-item {
+    display: flex;
+    padding: 20px 0;
+    margin: 0 40px;
+    align-items: center;
+    &:not(:last-child) {
+      border-bottom: 1px solid #b8bcca;
+    }
+    .text {
+      width: 100%;
+      max-width: 500px;
+    }
+    .book-title {
+      color: #303441;
+      margin: 0 0 2px 0;
+    }
+    .author {
+      color: #6f7482;
+      font-size: 14px;
+      margin: 0;
+    }
+    .year {
+      margin: auto;
+    }
+    img {
+      width: 80px;
+      aspect-ratio: 61 / 74;
+    }
+  }
+`;
+
+const BookSection = styled.section`
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: 55px;
+
+  .details {
+    border-bottom: 1px solid rgb(220 220 221);
+    &--item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      color: #6f7482;
+      margin-bottom: 10px;
+    }
   }
 `;
 
@@ -155,7 +217,11 @@ const HomePage: React.FC = () => {
               </table>
             </MemberInfoContainer>
           </InfoSection>
-          <Divider />
+          <Divider
+            style={{
+              margin: '42px 0',
+            }}
+          />
           <Title level={4}>Select Book</Title>
           <SelectBookInputs>
             <div>
@@ -204,7 +270,158 @@ const HomePage: React.FC = () => {
               </Select>
             </div>
           </SelectBookInputs>
-          <Divider />
+          <ListView>
+            <div className="list-item">
+              <Checkbox
+                style={{
+                  marginRight: 30,
+                }}
+              />
+              <div className="text">
+                <p className="book-title">The C++ Programming Language</p>
+                <p className="author">by Alan Turing</p>
+              </div>
+              <div className="year">2008</div>
+              <img src="/img/book-1.png" />
+            </div>
+            <div className="list-item">
+              <Checkbox
+                style={{
+                  marginRight: 30,
+                }}
+                defaultChecked
+              />
+              <div className="text">
+                <p className="book-title">C Programming in Easy Steps</p>
+                <p className="author">by Alan Turing</p>
+              </div>
+              <div className="year">2009</div>
+              <img src="/img/book-2.png" />
+            </div>
+            <div className="list-item">
+              <Checkbox
+                style={{
+                  marginRight: 30,
+                }}
+                defaultChecked
+              />
+              <div className="text">
+                <p className="book-title">
+                  Programming: Principles and Practise using Scratch
+                </p>
+                <p className="author">by Alan Turing</p>
+              </div>
+              <div className="year">2011</div>
+              <img src="/img/book-3.png" />
+            </div>
+          </ListView>
+          <Divider
+            style={{
+              margin: '42px 0',
+            }}
+          />
+          <BookSection>
+            <div className="book-details">
+              <Title
+                level={5}
+                style={{
+                  paddingBottom: 10,
+                  borderBottom: '1px solid rgb(220 220 221)',
+                }}
+              >
+                Book 1 Details
+              </Title>
+              <div className="details">
+                <div className="details--item">
+                  <div>Title</div>
+                  <div>C Programming in Easy Steps</div>
+                </div>
+                <div className="details--item">
+                  <div>Author</div>
+                  <div>Alan Turing</div>
+                </div>
+                <div className="details--item">
+                  <div>Book Copy ID</div>
+                  <div>CS9483</div>
+                </div>
+                <div className="details--item">
+                  <div>Expected Available Date</div>
+                  <div>18/11/2021</div>
+                </div>
+              </div>
+            </div>
+            <div className="pickup-date-container">
+              <div>
+                <Label>
+                  Preferred Pickup Date <span className="required">*</span>
+                </Label>
+                <DatePicker
+                  defaultValue={moment('18/11/2021', 'DD/MM/YYYY')}
+                  format={'DD/MM/YYYY'}
+                  size="large"
+                  style={{
+                    width: '100%',
+                  }}
+                />
+              </div>
+            </div>
+          </BookSection>
+          <Divider
+            style={{
+              margin: '42px 0',
+            }}
+          />
+          <BookSection>
+            <div className="book-details">
+              <Title
+                level={5}
+                style={{
+                  paddingBottom: 10,
+                  borderBottom: '1px solid rgb(220 220 221)',
+                }}
+              >
+                Book 2 Details
+              </Title>
+              <div className="details">
+                <div className="details--item">
+                  <div>Title</div>
+                  <div>Programming: Principles and Practise using Scratch</div>
+                </div>
+                <div className="details--item">
+                  <div>Author</div>
+                  <div>Alan Turing</div>
+                </div>
+                <div className="details--item">
+                  <div>Book Copy ID</div>
+                  <div>CS4785</div>
+                </div>
+                <div className="details--item">
+                  <div>Expected Available Date</div>
+                  <div>19/11/2021</div>
+                </div>
+              </div>
+            </div>
+            <div className="pickup-date-container">
+              <div>
+                <Label>
+                  Preferred Pickup Date <span className="required">*</span>
+                </Label>
+                <DatePicker
+                  defaultValue={moment('19/11/2021', 'DD/MM/YYYY')}
+                  format={'DD/MM/YYYY'}
+                  size="large"
+                  style={{
+                    width: '100%',
+                  }}
+                />
+              </div>
+            </div>
+          </BookSection>
+          <Divider
+            style={{
+              margin: '42px 0',
+            }}
+          />
           <div>
             <Label>
               Verification code <span className="required">*</span>
@@ -215,6 +432,7 @@ const HomePage: React.FC = () => {
                 placeholder="e.g. 123456"
                 style={{ width: '230px', fontSize: 16 }}
                 prefix={<SecurityScanOutlined />}
+                required
               />
               <Button type="primary" size="large">
                 Get Code
@@ -224,8 +442,18 @@ const HomePage: React.FC = () => {
               </Button>
             </div>
           </div>
-          <Divider />
-          <Button type="primary" size="large">
+          <Divider
+            style={{
+              margin: '42px 0',
+            }}
+          />
+          <Button
+            type="primary"
+            size="large"
+            style={{
+              float: 'right',
+            }}
+          >
             Reserve
           </Button>
         </Content>
