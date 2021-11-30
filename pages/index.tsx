@@ -21,6 +21,24 @@ import moment from 'moment';
 const { Title, Paragraph } = Typography;
 const { Option } = Select;
 
+const ReserveBookTitle = styled.h1`
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 0px;
+  text-align: left;
+  align-self: flex-start;
+  background-color: #FFE0E0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transform: translateY(10px);
+  z-index: 0;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 18px;
+  display: inline-block;
+  width: 200px;
+`;
+
 const Main = styled.main`
   display: flex;
   flex-direction: column;
@@ -28,6 +46,7 @@ const Main = styled.main`
   align-items: center;
   background-color: #fef1ef;
   padding-bottom: 50px;
+  z-index: 1;
 
   .logo {
     width: 270px;
@@ -48,6 +67,7 @@ const Content = styled.div`
   padding: 40px;
   border-radius: 10px;
   box-shadow: 13px 37px 84px 0px rgba(50, 55, 72, 0.1);
+  z-index: 100;
 `;
 
 const InfoSection = styled.section`
@@ -160,9 +180,11 @@ const HomePage: React.FC = () => {
     <>
       <Head>
         <title>Revervation Form - SAD Library</title>
-      </Head>
+      </Head>      
       <Main>
         <img className="logo" alt="SAD Library" src="/img/logo.svg" />
+        <div className="container">
+        <ReserveBookTitle>Reserve Book</ReserveBookTitle></div>        
         <Content className="container">
           <InfoSection>
             <MemberBasicDataContainer>
